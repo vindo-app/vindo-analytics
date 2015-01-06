@@ -1,4 +1,4 @@
-#Ruby on Rails (4.1.8)
+#Ruby on Rails (4.2.0)
 
 ##Using the Pack
 To use the Pack, we created 2 menu options, which you can find on the right of the menu. These menus can be configured in the `.codio` file.
