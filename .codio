@@ -3,7 +3,7 @@
 
 // Run button configuration
   "commands": {
-        "Start Rails Server": "rails server"
+        "Start Rails Server": "rails server -b 0.0.0.0"
   },
 
 // Preview button configuration

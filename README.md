@@ -10,7 +10,7 @@ To use the Pack, we created 2 menu options, which you can find on the right of t
 To access your application from a browser, you can use the menu option described above. The url of your Rails project can be found in the `Project->Box Info` menu and will look something like this
 
 ```
-https://vital-ego.box.codio.io:3000/
+http://vital-ego.box.codio.io:3000/
 ```
 
 
