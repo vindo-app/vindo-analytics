@@ -22,3 +22,468 @@ Started GET "/" for 172.17.42.1 at 2015-01-27 10:16:55 +0000
 Processing by Rails::WelcomeController#index as HTML
   Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/railties-4.2.0/lib/rails/templates/rails/welcome/index.html.erb (2.1ms)
 Completed 200 OK in 27ms (Views: 11.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 172.17.42.1 at 2015-11-18 20:45:40 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/railties-4.2.0/lib/rails/templates/rails/welcome/index.html.erb (1.5ms)
+Completed 200 OK in 24ms (Views: 7.9ms | ActiveRecord: 0.0ms)
+  [1m[36m (6.6ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (6.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreatePings (20151118204819)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "pings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "uuid" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151118204819"]]
+  [1m[35m (6.0ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.3ms)[0m  SELECT  1 AS one FROM "pings" WHERE "pings"."uuid" = 'abc' LIMIT 1
+  [1m[36mSQL (3.3ms)[0m  [1mINSERT INTO "pings" ("uuid", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["uuid", "abc"], ["created_at", "2015-11-18 21:01:21.601642"], ["updated_at", "2015-11-18 21:01:21.601642"]]
+  [1m[35m (4.9ms)[0m  commit transaction
+
+
+Started GET "/ping" for 127.0.0.1 at 2015-11-18 22:53:21 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by AnalyticsController#ping as */*
+  [1m[35mPing Load (0.1ms)[0m  SELECT  "pings".* FROM "pings" WHERE "pings"."uuid" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.1ms)[0m  SELECT  1 AS one FROM "pings" WHERE "pings"."uuid" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 68ms
+
+ActionView::MissingTemplate (Missing template analytics/ping, application/ping with {:locale=>[:en], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/codio/workspace/app/views"
+):
+  actionview (4.2.0) lib/action_view/path_set.rb:46:in `find'
+  actionview (4.2.0) lib/action_view/lookup_context.rb:121:in `find'
+  actionview (4.2.0) lib/action_view/renderer/abstract_renderer.rb:18:in `find_template'
+  actionview (4.2.0) lib/action_view/renderer/template_renderer.rb:40:in `determine_template'
+  actionview (4.2.0) lib/action_view/renderer/template_renderer.rb:8:in `render'
+  actionview (4.2.0) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.0) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.0) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.0) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.0) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.0) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.0) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.0) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.0) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+  activesupport (4.2.0) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/benchmark.rb:294:in `realtime'
+  activesupport (4.2.0) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+  activerecord (4.2.0) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:40:in `render'
+  actionpack (4.2.0) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.0) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.0) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.0) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:234:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:234:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:234:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:92:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_process_action_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.2.0) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.0) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.0) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.0) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.0) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.0) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.0) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.2.0) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.0) lib/action_controller/metal.rb:236:in `block in action'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:42:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.2ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (29.0ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (62.2ms)
+
+
+Started GET "/ping" for 127.0.0.1 at 2015-11-18 22:54:00 +0000
+Processing by AnalyticsController#ping as */*
+  [1m[35mPing Load (0.2ms)[0m  SELECT  "pings".* FROM "pings" WHERE "pings"."uuid" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.1ms)[0m  SELECT  1 AS one FROM "pings" WHERE "pings"."uuid" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 7ms
+
+ActionView::MissingTemplate (Missing template analytics/ping, application/ping with {:locale=>[:en], :formats=>[:html, :text, :js, :css, :ics, :csv, :vcf, :png, :jpeg, :gif, :bmp, :tiff, :mpeg, :xml, :rss, :atom, :yaml, :multipart_form, :url_encoded_form, :json, :pdf, :zip], :variants=>[], :handlers=>[:erb, :builder, :raw, :ruby, :coffee, :jbuilder]}. Searched in:
+  * "/home/codio/workspace/app/views"
+):
+  actionview (4.2.0) lib/action_view/path_set.rb:46:in `find'
+  actionview (4.2.0) lib/action_view/lookup_context.rb:121:in `find'
+  actionview (4.2.0) lib/action_view/renderer/abstract_renderer.rb:18:in `find_template'
+  actionview (4.2.0) lib/action_view/renderer/template_renderer.rb:40:in `determine_template'
+  actionview (4.2.0) lib/action_view/renderer/template_renderer.rb:8:in `render'
+  actionview (4.2.0) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (4.2.0) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (4.2.0) lib/action_view/rendering.rb:100:in `_render_template'
+  actionpack (4.2.0) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (4.2.0) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (4.2.0) lib/action_controller/metal/rendering.rb:32:in `render_to_body'
+  actionpack (4.2.0) lib/action_controller/metal/renderers.rb:37:in `render_to_body'
+  actionpack (4.2.0) lib/abstract_controller/rendering.rb:25:in `render'
+  actionpack (4.2.0) lib/action_controller/metal/rendering.rb:16:in `render'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+  activesupport (4.2.0) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/benchmark.rb:294:in `realtime'
+  activesupport (4.2.0) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+  activerecord (4.2.0) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:40:in `render'
+  actionpack (4.2.0) lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+  actionpack (4.2.0) lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+  actionpack (4.2.0) lib/abstract_controller/base.rb:198:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/rendering.rb:10:in `process_action'
+  actionpack (4.2.0) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:117:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:234:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:234:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:234:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:169:in `block in halting'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:92:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:92:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_process_action_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/rescue.rb:29:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+  activesupport (4.2.0) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (4.2.0) lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+  activesupport (4.2.0) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (4.2.0) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (4.2.0) lib/action_controller/metal/params_wrapper.rb:250:in `process_action'
+  activerecord (4.2.0) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (4.2.0) lib/abstract_controller/base.rb:137:in `process'
+  actionview (4.2.0) lib/action_view/rendering.rb:30:in `process'
+  actionpack (4.2.0) lib/action_controller/metal.rb:195:in `dispatch'
+  actionpack (4.2.0) lib/action_controller/metal/rack_delegation.rb:13:in `dispatch'
+  actionpack (4.2.0) lib/action_controller/metal.rb:236:in `block in action'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:73:in `dispatch'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:42:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:43:in `block in serve'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `each'
+  actionpack (4.2.0) lib/action_dispatch/journey/router.rb:30:in `serve'
+  actionpack (4.2.0) lib/action_dispatch/routing/route_set.rb:802:in `call'
+  rack (1.6.0) lib/rack/etag.rb:24:in `call'
+  rack (1.6.0) lib/rack/conditionalget.rb:25:in `call'
+  rack (1.6.0) lib/rack/head.rb:13:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/params_parser.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/flash.rb:260:in `call'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:225:in `context'
+  rack (1.6.0) lib/rack/session/abstract/id.rb:220:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/cookies.rb:560:in `call'
+  activerecord (4.2.0) lib/active_record/query_cache.rb:36:in `call'
+  activerecord (4.2.0) lib/active_record/connection_adapters/abstract/connection_pool.rb:647:in `call'
+  activerecord (4.2.0) lib/active_record/migration.rb:378:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `call'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:88:in `_run_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:734:in `_run_call_callbacks'
+  activesupport (4.2.0) lib/active_support/callbacks.rb:81:in `run_callbacks'
+  actionpack (4.2.0) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/remote_ip.rb:78:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.2.0) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.2.0) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.2.0) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.6.0) lib/rack/methodoverride.rb:22:in `call'
+  rack (1.6.0) lib/rack/runtime.rb:18:in `call'
+  activesupport (4.2.0) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  actionpack (4.2.0) lib/action_dispatch/middleware/static.rb:113:in `call'
+  rack (1.6.0) lib/rack/sendfile.rb:113:in `call'
+  railties (4.2.0) lib/rails/engine.rb:518:in `call'
+  railties (4.2.0) lib/rails/application.rb:164:in `call'
+  rack (1.6.0) lib/rack/lock.rb:17:in `call'
+  rack (1.6.0) lib/rack/content_length.rb:15:in `call'
+  rack (1.6.0) lib/rack/handler/webrick.rb:89:in `service'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/webrick/httpserver.rb:138:in `service'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/webrick/httpserver.rb:94:in `run'
+  /home/codio/.rbenv/versions/2.1.5/lib/ruby/2.1.0/webrick/server.rb:295:in `block in start_thread'
+
+
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.5ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/missing_template.html.erb within rescues/layout (26.1ms)
+
+
+Started GET "/ping" for 127.0.0.1 at 2015-11-18 22:56:20 +0000
+Processing by AnalyticsController#ping as */*
+  [1m[35mPing Load (0.1ms)[0m  SELECT  "pings".* FROM "pings" WHERE "pings"."uuid" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.1ms)[0m  SELECT  1 AS one FROM "pings" WHERE "pings"."uuid" IS NULL LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 13ms (Views: 3.4ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/ping?uuid=aaa" for 127.0.0.1 at 2015-11-18 22:57:42 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"aaa"}
+  [1m[35mPing Load (0.3ms)[0m  SELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1  [["uuid", "aaa"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.1ms)[0m  SELECT  1 AS one FROM "pings" WHERE "pings"."uuid" = 'aaa' LIMIT 1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "pings" ("uuid", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["uuid", "aaa"], ["created_at", "2015-11-18 22:57:42.529694"], ["updated_at", "2015-11-18 22:57:42.529694"]]
+  [1m[35m (7.3ms)[0m  commit transaction
+  Rendered text template (0.0ms)
+Completed 200 OK in 12ms (Views: 0.5ms | ActiveRecord: 8.1ms)
+
+
+Started GET "/ping?uuid=aaa" for 127.0.0.1 at 2015-11-18 23:02:43 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"aaa"}
+  [1m[36mPing Load (0.1ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "aaa"]]
+  Rendered text template (0.0ms)
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to Pings (20151118231401)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "pings" ADD "version" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20151118231401"]]
+  [1m[36m (4.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (4.8ms)[0m  [1mCREATE TABLE "pings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "uuid" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "version" varchar) [0m
+  [1m[35m (4.0ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar NOT NULL) 
+  [1m[36m (4.2ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (3.6ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.2ms)[0m  [1mSELECT version FROM "schema_migrations"[0m
+  [1m[35m (6.7ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151118231401')
+  [1m[36m (5.4ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20151118204819')[0m
+  [1m[35m (4.4ms)[0m  CREATE TABLE "pings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "uuid" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "version" varchar) 
+  [1m[36m (4.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (4.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (5.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20151118231401')[0m
+  [1m[35m (4.4ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20151118204819')
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/ping?uuid=a" for 127.0.0.1 at 2015-11-18 23:21:56 +0000
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"a"}
+  [1m[36mPing Load (0.2ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "a"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPing Exists (0.2ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE "pings"."uuid" = 'a' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pings" ("uuid", "created_at", "updated_at") VALUES (?, ?, ?)  [["uuid", "a"], ["created_at", "2015-11-18 23:21:56.649199"], ["updated_at", "2015-11-18 23:21:56.649199"]]
+  [1m[36m (4.2ms)[0m  [1mcommit transaction[0m
+Completed 500 Internal Server Error in 45ms
+
+NoMethodError (undefined method `<' for nil:NilClass):
+  app/controllers/analytics_controller.rb:7:in `ping'
+
+
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.8ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (6.1ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (7.6ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (45.0ms)
+
+
+Started GET "/ping?uuid=a" for 127.0.0.1 at 2015-11-18 23:22:02 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"a"}
+  [1m[35mPing Load (0.1ms)[0m  SELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1  [["uuid", "a"]]
+Completed 500 Internal Server Error in 1ms
+
+NoMethodError (undefined method `<' for nil:NilClass):
+  app/controllers/analytics_controller.rb:7:in `ping'
+
+
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_source.erb (4.9ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /home/codio/.rbenv/versions/2.1.5/lib/ruby/gems/2.1.0/gems/actionpack-4.2.0/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.8ms)
+
+
+Started GET "/ping?uuid=a" for 127.0.0.1 at 2015-11-18 23:22:45 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"a"}
+  [1m[36mPing Load (0.2ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "a"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPing Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'a' AND "pings"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  Rendered text template (0.0ms)
+Completed 200 OK in 11ms (Views: 1.7ms | ActiveRecord: 0.9ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (1.8ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+
+
+Started GET "/ping?uuid=a" for 127.0.0.1 at 2015-11-18 23:24:40 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"a"}
+  [1m[36mPing Load (0.1ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "a"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPing Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'a' AND "pings"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  Rendered text template (0.0ms)
+Completed 200 OK in 13ms (Views: 1.6ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/ping?uuid=a" for 127.0.0.1 at 2015-11-18 23:25:21 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"a"}
+  [1m[36mPing Load (0.1ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "a"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPing Exists (0.3ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'a' AND "pings"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  commit transaction
+  Rendered text template (0.0ms)
+Completed 200 OK in 11ms (Views: 1.4ms | ActiveRecord: 1.1ms)
+
+
+Started GET "/ping?uuid=a&version=0.9" for 127.0.0.1 at 2015-11-18 23:25:40 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"a", "version"=>"0.9"}
+  [1m[36mPing Load (0.1ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "a"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPing Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'a' AND "pings"."id" != 1) LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  UPDATE "pings" SET "version" = ?, "updated_at" = ? WHERE "pings"."id" = ?  [["version", "0.9"], ["updated_at", "2015-11-18 23:25:40.317643"], ["id", 1]]
+  [1m[36m (4.6ms)[0m  [1mcommit transaction[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 11ms (Views: 0.7ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/ping?uuid=a&version=0.9.1" for 127.0.0.1 at 2015-11-18 23:25:49 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"a", "version"=>"0.9.1"}
+  [1m[35mPing Load (0.1ms)[0m  SELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1  [["uuid", "a"]]
+  [1m[36m (0.3ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.1ms)[0m  SELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'a' AND "pings"."id" != 1) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "pings" SET "version" = ?, "updated_at" = ? WHERE "pings"."id" = ?[0m  [["version", "0.9.1"], ["updated_at", "2015-11-18 23:25:49.414223"], ["id", 1]]
+  [1m[35m (4.5ms)[0m  commit transaction
+  Rendered text template (0.0ms)
+Completed 200 OK in 9ms (Views: 0.4ms | ActiveRecord: 5.2ms)
+
+
+Started GET "/ping?uuid=bbb&version=0.9.1" for 127.0.0.1 at 2015-11-18 23:25:58 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"bbb", "version"=>"0.9.1"}
+  [1m[36mPing Load (0.1ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "bbb"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPing Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE "pings"."uuid" = 'bbb' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pings" ("uuid", "created_at", "updated_at") VALUES (?, ?, ?)  [["uuid", "bbb"], ["created_at", "2015-11-18 23:25:58.644400"], ["updated_at", "2015-11-18 23:25:58.644400"]]
+  [1m[36m (6.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  begin transaction
+  [1m[36mPing Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'bbb' AND "pings"."id" != 2) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "pings" SET "version" = ?, "updated_at" = ? WHERE "pings"."id" = ?  [["version", "0.9.1"], ["updated_at", "2015-11-18 23:25:58.653515"], ["id", 2]]
+  [1m[36m (3.7ms)[0m  [1mcommit transaction[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 17ms (Views: 0.5ms | ActiveRecord: 11.4ms)
+
+
+Started GET "/ping?uuid=ccc&version=0.9.1" for 127.0.0.1 at 2015-11-18 23:26:08 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"ccc", "version"=>"0.9.1"}
+  [1m[35mPing Load (0.1ms)[0m  SELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1  [["uuid", "ccc"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.1ms)[0m  SELECT  1 AS one FROM "pings" WHERE "pings"."uuid" = 'ccc' LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "pings" ("uuid", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["uuid", "ccc"], ["created_at", "2015-11-18 23:26:08.572317"], ["updated_at", "2015-11-18 23:26:08.572317"]]
+  [1m[35m (4.7ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mPing Exists (0.1ms)[0m  SELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'ccc' AND "pings"."id" != 3) LIMIT 1
+  [1m[36mSQL (0.1ms)[0m  [1mUPDATE "pings" SET "version" = ?, "updated_at" = ? WHERE "pings"."id" = ?[0m  [["version", "0.9.1"], ["updated_at", "2015-11-18 23:26:08.579577"], ["id", 3]]
+  [1m[35m (3.4ms)[0m  commit transaction
+  Rendered text template (0.0ms)
+Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 8.8ms)
+
+
+Started GET "/ping?uuid=dc&version=0.9" for 127.0.0.1 at 2015-11-18 23:26:15 +0000
+Processing by AnalyticsController#ping as */*
+  Parameters: {"uuid"=>"dc", "version"=>"0.9"}
+  [1m[36mPing Load (0.1ms)[0m  [1mSELECT  "pings".* FROM "pings" WHERE "pings"."uuid" = ? LIMIT 1[0m  [["uuid", "dc"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mPing Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE "pings"."uuid" = 'dc' LIMIT 1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "pings" ("uuid", "created_at", "updated_at") VALUES (?, ?, ?)  [["uuid", "dc"], ["created_at", "2015-11-18 23:26:15.307114"], ["updated_at", "2015-11-18 23:26:15.307114"]]
+  [1m[36m (4.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mPing Exists (0.1ms)[0m  [1mSELECT  1 AS one FROM "pings" WHERE ("pings"."uuid" = 'dc' AND "pings"."id" != 4) LIMIT 1[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "pings" SET "version" = ?, "updated_at" = ? WHERE "pings"."id" = ?  [["version", "0.9"], ["updated_at", "2015-11-18 23:26:15.313633"], ["id", 4]]
+  [1m[36m (3.4ms)[0m  [1mcommit transaction[0m
+  Rendered text template (0.0ms)
+Completed 200 OK in 14ms (Views: 0.4ms | ActiveRecord: 8.4ms)
