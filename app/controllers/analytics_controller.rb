@@ -4,9 +4,8 @@ class AnalyticsController < ApplicationController
         version = params[:version]
         
         @ping = Ping.find_by_uuid(uuid) || Ping.create(uuid: uuid)
-        @ping.version = version
-        @ping.save
+        @ping.update(version: version)
 
-        render nothing: true
+        head :no_content
     end
 end
