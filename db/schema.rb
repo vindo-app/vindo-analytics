@@ -11,13 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118231401) do
+ActiveRecord::Schema.define(version: 20160523212459) do
 
   create_table "pings", force: :cascade do |t|
     t.string   "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "version"
+    t.string   "ip"
+  end
+
+  create_table "pings_programs", id: false, force: :cascade do |t|
+    t.integer "ping_id"
+    t.integer "program_id"
+  end
+
+  create_table "programs", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
