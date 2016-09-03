@@ -7,5 +7,6 @@ gem 'pg', group: :production
 
 gem 'sass'
 gem 'coffee-script'
+gem 'uglifier'
 
 gem 'byebug'
