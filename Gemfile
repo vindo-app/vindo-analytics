@@ -5,6 +5,8 @@ gem 'rails', '~>5'
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
 
+gem 'httparty'
+
 gem 'sass'
 gem 'coffee-script'
 gem 'uglifier'
