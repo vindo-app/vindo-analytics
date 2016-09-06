@@ -13,3 +13,7 @@ module Workspace
         # -- all .rb files in that directory are automatically loaded.
     end
 end
+
+Rails.application.configure do
+    config.action_cable.disable_request_forgery_protection = true
+end
