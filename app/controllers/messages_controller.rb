@@ -14,28 +14,24 @@ class MessagesController < ApplicationController
         text = params[:text]
         from_user = !@ping.nil?
         if !from_user 
-            puts params[:token]
-            puts ENV["INCOMING_TOKEN"]
-            head :forbidden if params[:token] != ENV["INCOMING_TOKEN"]
+            if params[:token] != ENV["INCOMING_TOKEN"]
+                head :forbidden 
+                return
+            end
             uuid = text.slice!(/\A[a-z]{30,50} /)
-            puts uuid
             if uuid.nil?
                 render nothing: true
                 return
             end
             uuid.chomp!(" ")
-            puts uuid
 
             @ping = Ping.find_by_uuid(uuid)
-            puts @ping
             if @ping.nil?
                 render_slack "Ping ID not found."
                 return
             end
         end
 
-        puts "from_user is #{from_user}"
-        puts "uuid is #{params[:uuid]}"
         @message = Message.create(body: text, from_user: from_user, ping: @ping)
         head :no_content
     end

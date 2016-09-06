@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20160903213828) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "messages", force: :cascade do |t|
     t.text     "body"
     t.boolean  "from_user"
     t.integer  "ping_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["ping_id"], name: "index_messages_on_ping_id"
+    t.index ["ping_id"], name: "index_messages_on_ping_id", using: :btree
   end
 
   create_table "pings", force: :cascade do |t|

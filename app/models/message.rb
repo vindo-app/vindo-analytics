@@ -12,6 +12,8 @@ class Message < ApplicationRecord
             deliver_to_user
         end
     end
+
+    private
     def deliver_to_slack
         puts "delivering to slack"
         response = HTTParty.post(ENV["OUTGOING_URL"], body: {
@@ -20,6 +22,8 @@ class Message < ApplicationRecord
         }.to_json)
         puts "response: #{response.body}"
     end
+
     def deliver_to_user
+        MessagesChannel.broadcast_to(self.ping, self)
     end
 end
